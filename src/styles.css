@@ -1,0 +1,92 @@
+:root {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: #111;
+}
+
+/* Контейнер страницы */
+.app-container {
+  max-width: 1400px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: 32px;
+}
+
+.controls {
+  margin-bottom: 18px;
+}
+
+.search-input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 350px;
+  font-size: 16px;
+}
+
+/* Сетка карточек — увеличили размер */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* раньше 220px */
+  gap: 24px; /* увеличили расстояние */
+}
+
+/* Карточка */
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Обёртка картинки — увеличили высоту */
+.img-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px; /* было 300px → увеличили */
+  overflow: hidden;
+  background: #fafafa;
+}
+
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* картинка полностью помещается */
+  display: block;
+}
+
+/* Подпись на картинке */
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+  color: #fff;
+}
+
+.overlay h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Адаптив для телефона */
+@media (max-width: 480px) {
+  .img-wrap {
+    height: 240px;
+  }
+  .search-input {
+    width: 100%;
+  }
+}

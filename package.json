@@ -1,0 +1,24 @@
+{
+  "name": "animal-cards",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Учебное React-приложение — карточки животных",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint --ext .js,.jsx src || true",
+    "format": "prettier --write \"src/**/*.{js,jsx,css,md}\""
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^5.0.0",
+    "eslint": "^8.50.0",
+    "prettier": "^2.8.8"
+  },
+  "homepage": "https://fryzux.github.io/animal-cards"
+}

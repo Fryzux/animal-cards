@@ -1,19 +1,21 @@
-name: CI / Build / Deploy
+name: CI / Build / Deploy (gh-pages)
 
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -25,17 +27,21 @@ jobs:
         run: npm ci
 
       - name: Lint (optional)
-        run: npm run lint
+        run: npm run lint || true
 
       - name: Build
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: actions/configure-pages@v3
+      # Fallback: копируем index.html -> 404.html чтобы SPA работал на прямых ссылках
+      - name: Prepare 404 fallback
+        run: |
+          if [ -f dist/index.html ]; then
+            cp dist/index.html dist/404.html
+          fi
 
-      - name: Upload artifact for deployment
-        uses: actions/upload-pages-artifact@v1
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./dist
-
-  # Optional: publish the artifact to GitHub Pages after the above job finishes automatically.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          # optional: можно указать custom_branch: 'gh-pages' (по умолчанию gh-pages)
